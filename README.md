@@ -1,6 +1,6 @@
 
 
-# Maria Maria Confeitaria
+# Maria Maria Confeitaria (em desenvolvimento)
 
 ## Sobre
 
@@ -21,3 +21,11 @@ O backend está sendo desenvolvido em **Go**, e este projeto também é uma opor
 1. Clone o repositório:
    ```bash
    git clone https://github.com/usuario/backend-mariamaria.git
+
+2. Entre no projeto
+   ```bash
+   cd backend-mariamaria
+   
+3. Inicie o docker
+   ```bash
+   docker compose up -d
