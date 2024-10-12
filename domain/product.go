@@ -17,8 +17,17 @@ func (pu *Product) GetProducts() ([]model.Product, error) {
 	return pu.persistence.GetProducts()
 }
 
-func (pu *Product) CreateProduct(product model.Product) (model.Product, error) {
+func (pu *Product) GetProductById(productId int) (*model.Product, error) {
+	product, err := pu.persistence.GetProductById(productId)
 
+	if (err != nil) {
+		return nil, err
+	}
+
+	return product, nil
+}
+
+func (pu *Product) CreateProduct(product model.Product) (model.Product, error) {
 	productId, err := pu.persistence.CreateProduct(product)
 
 	if (err != nil) {

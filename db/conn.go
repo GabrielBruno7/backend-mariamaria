@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	host     = "localhost"
+	host     = "go_db"
 	dbname   = "postgres"
 	port     = 5432
 	user     = "postgres"
@@ -25,6 +25,7 @@ func ConnectDB() (*sql.DB, error) {
 	}
 
 	err = db.Ping()
+
 	if err != nil {
 		panic(err)
 	}
