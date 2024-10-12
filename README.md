@@ -28,4 +28,5 @@ O backend está sendo desenvolvido em **Go**, e este projeto também é uma opor
    
 3. Inicie o docker
    ```bash
+   docker compose up --build
    docker compose up -d
