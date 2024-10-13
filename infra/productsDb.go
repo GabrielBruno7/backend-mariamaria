@@ -17,7 +17,7 @@ func NewProductDb(connection *sql.DB) ProductDb {
 }
 
 func (pr *ProductDb) GetProducts() ([]model.Product, error) {
-	query := "SELECT id, name, price FROM product"
+	query := "SELECT id, name, price FROM product ORDER BY id"
 
 	rows, err := pr.connection.Query(query)
 
@@ -94,4 +94,46 @@ func (pr *ProductDb) CreateProduct(product model.Product) (int, error) {
 	query.Close()
 
 	return id, nil
+}
+
+func (pr *ProductDb) DeleteProduct(productId int) (*model.Product) {
+    query, err := pr.connection.Prepare("DELETE FROM product WHERE id = $1")
+
+    if err != nil {
+        fmt.Println(err)
+        return nil
+    }
+    defer query.Close()
+
+    _, err = query.Exec(productId)
+    if err != nil {
+        fmt.Println(err)
+        return nil
+    }
+
+    return &model.Product{}
+}
+
+
+func (pr *ProductDb) UpdateProduct(productId int, productData *model.Product) (*model.Product, error) {
+	query := "UPDATE product SET name = $2, price = $3 WHERE id = $1 RETURNING id, name, price"
+
+	stmt, err := pr.connection.Prepare(query)
+	if err != nil {
+		fmt.Println("Error preparing statement:", err)
+		return nil, err
+	}
+	defer stmt.Close()
+
+	row := stmt.QueryRow(productId, productData.Name, productData.Price)
+
+	var updatedProduct model.Product
+	if err := row.Scan(&updatedProduct.ID, &updatedProduct.Name, &updatedProduct.Price); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, fmt.Errorf("Product not found")
+		}
+		return nil, err
+	}
+
+	return &updatedProduct, nil
 }

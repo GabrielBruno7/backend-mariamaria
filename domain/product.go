@@ -38,3 +38,18 @@ func (pu *Product) CreateProduct(product model.Product) (model.Product, error) {
 
 	return product, nil
 }
+
+func (pu *Product) DeleteProduct(productId int) (*model.Product, error) {
+	product := pu.persistence.DeleteProduct(productId)
+
+	return product, nil
+}
+
+func (pu *Product) UpdateProduct(productId int, productData *model.Product) (*model.Product, error) {
+	updatedProduct, err := pu.persistence.UpdateProduct(productId, productData)
+	if err != nil {
+		return nil, err
+	}
+
+	return updatedProduct, nil
+}

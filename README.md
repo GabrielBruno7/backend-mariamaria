@@ -14,7 +14,6 @@ O backend está sendo desenvolvido em **Go**, e este projeto também é uma opor
 - **Gin**: Framework web em Go para criação de APIs RESTful.
 - **PostgreSQL** (ou outro banco de dados): Utilizado para armazenar os dados da confeitaria (produtos, pedidos, clientes, etc.).
 - **Docker**: Para facilitar o processo de desenvolvimento e deploy.
-- **Swagger**: Para documentação automática da API.
 
 ## Como rodar o projeto
 
